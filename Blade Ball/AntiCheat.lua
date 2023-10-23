@@ -17,14 +17,14 @@ local Namecall; Namecall                                        = hookmetamethod
         if Name == "" then return task.wait(9e9) end
     end
 
-	  -- Incase the game updates and adds client kicks
+    -- Incase the game updates and adds client kicks
     if Method == "Kick" and not checkcaller() then return task.wait(9e9) end
     if Method == "kick" and not checkcaller() then return task.wait(9e9) end
 
     return Namecall(Self, unpack(Arguments))
 end)
 
-local Hook; Hook 												                        = hookfunction(Instance.new("RemoteEvent").FireServer, function(Self, ...)
+local Hook; Hook						= hookfunction(Instance.new("RemoteEvent").FireServer, function(Self, ...)
     local Arguments                                             = {...}
     local Name                                                  = Self.Name
         
