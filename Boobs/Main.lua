@@ -9,13 +9,33 @@ local Services                                                  = setmetatable({
     end
 })
 
-if getgenv()["Discord.gg/PfXgy5Nq34"] then
-	for Index, Connection in next, getgenv()["Discord.gg/PfXgy5Nq34"] do
-		Connection:Disconnect()
-	end
-end
+-- // Cleanup
+do
+	request({
+		Url             										= "http://127.0.0.1:6463/rpc?v=1",
+		Method              									= "POST",
+	
+		Headers = {
+			["Content-Type"]									= "application/json",
+			["Origin"]      									= "https://discord.com"
+		},
+	
+		Body 													= Services.HttpService:JSONEncode({
+			cmd             									= "INVITE_BROWSER",
+			args            									= { code = "PfXgy5Nq34" },
+			nonce           									= Services.HttpService:GenerateGUID(false)
+		}),
+	})
 
-getgenv()["Discord.gg/PfXgy5Nq34"]								= {}
+	if getgenv()["Discord.gg/PfXgy5Nq34"] then
+		for Index, Connection in next, getgenv()["Discord.gg/PfXgy5Nq34"] do
+			Connection:Disconnect()
+		end
+	end
+
+	getgenv()["Discord.gg/PfXgy5Nq34"]							= {}
+end
+-- // Cleanup End
 
 local Downloads 												= {}
 local List 														= {}
