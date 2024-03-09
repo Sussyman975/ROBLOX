@@ -279,7 +279,7 @@ else
 		getgenv()["Discord.gg/PfXgy5Nq34"][Player.Name]			= Player.CharacterAdded:Connect(function(New)
 			task.wait(1)
 
-			Apply(New, true)
+			Apply(New)
 		end)  
 	end)
 end
