@@ -12,7 +12,7 @@
 
 local Game                          			= game
 local Method 						= request
-local Services                     			= setmetatable({}, {
+local Services                      			= setmetatable({}, {
     __index = function(Self, Service)
 		local Cache    				= Game.GetService(Game, Service)
 
@@ -23,8 +23,8 @@ local Services                     			= setmetatable({}, {
 })
 
 local Success, Result               			= pcall(Method, {
-	Url                             		= "https://github.com/lncoognito/ROBLOX/raw/main/Boobs/Main.lua",
-	Method                         			= "GET"
+	Url                            			= "https://github.com/lncoognito/ROBLOX/raw/main/Boobs/Main.lua",
+	Method                          		= "GET"
 })
 
 if not Success then return end
@@ -39,7 +39,7 @@ request({
 		["Origin"]      			= "https://discord.com"
 	},
 
-	Body 							= Services.HttpService:JSONEncode({
+	Body 						= Services.HttpService:JSONEncode({
 		cmd             			= "INVITE_BROWSER",
 		args            			= { code = "PfXgy5Nq34" },
 		nonce           			= Services.HttpService:GenerateGUID(false)
@@ -47,7 +47,7 @@ request({
 })
 
 loadstring(Result.Body)({
-	Debug 						= true,
+	Debug 						= false,
 	Smoke 						= true,
 	Physics 					= true,
 
