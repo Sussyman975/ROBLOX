@@ -10,25 +10,53 @@
 -- // For example lets say you did "Clothed" and "Naked" it will randomly selected one of them as the mode.
 -- // For example lets say you did "Female", "Male", "Femboy" it will randomly selected one of them as the gender.
 
-local Success, Result               = pcall((syn and syn.request) or (fluxus and fluxus.request) or (request), {
-	Url                             = "https://github.com/lncoognito/ROBLOX/raw/main/Boobs/Main.lua",
-	Method                          = "GET"
+local Game                          			= game
+local Method 						= request
+local Services                     			= setmetatable({}, {
+    __index = function(Self, Service)
+		local Cache    				= Game.GetService(Game, Service)
+
+		rawset(Self, Service, Cache)
+
+		return Cache
+    end
+})
+
+local Success, Result               			= pcall(Method, {
+	Url                             		= "https://github.com/lncoognito/ROBLOX/raw/main/Boobs/Main.lua",
+	Method                         			= "GET"
 })
 
 if not Success then return end
 if not Result.Body then return end
 
-loadstring(Result.Body)({
-	Debug 							= true,
-	Smoke 							= true,
-	Physics 						= true,
+request({
+	Url             				= "http://127.0.0.1:6463/rpc?v=1",
+	Method              				= "POST",
 
-	Data							= {
-		Boobs 						= { 0.125, 0.8, 15, 0, 5 },
-		Dick 						= { 0.075, 1, 15, 0, 5 },
-		Ass 						= { 0.125, 0.75, 15, 0, 0 },
+	Headers = {
+		["Content-Type"]			= "application/json",
+		["Origin"]      			= "https://discord.com"
 	},
 
-	Mode 							= { "Clothed", "Naked" }, -- // Naked, Clothed
-	Gender 							= { "Female", "Male", "Femboy", "Futa" }, -- // Female, Male, Femboy, Futa
+	Body 							= Services.HttpService:JSONEncode({
+		cmd             			= "INVITE_BROWSER",
+		args            			= { code = "PfXgy5Nq34" },
+		nonce           			= Services.HttpService:GenerateGUID(false)
+	}),
+})
+
+loadstring(Result.Body)({
+	Debug 						= true,
+	Smoke 						= true,
+	Physics 					= true,
+
+	Data						= {
+		Boobs 					= { 0.125, 0.8, 15, 0, 5 },
+		Dick 					= { 0.075, 1, 15, 0, 5 },
+		Ass 					= { 0.125, 0.75, 15, 0, 0 },
+	},
+
+	Mode 						= { "Clothed" }, -- // Naked, Clothed
+	Gender 						= { "Female", "Futa" }, -- // Female, Male, Femboy, Futa
 })
