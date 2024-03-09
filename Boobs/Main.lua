@@ -27,14 +27,9 @@ local FindFirstChild											= Game.FindFirstChild
 local WaitForChild												= Game.WaitForChild
 local IsLoaded													= Game.IsLoaded
 
-Services.StarterGui:SetCore("SendNotification",{
+Services.StarterGui:SetCore("SendNotification", {
 	Title 														= "Fondra",
-	Text														= "Loading in PHYSICS",
-})
-
-Services.StarterGui:SetCore("SendNotification",{
-	Title 														= "Fondra",
-	Text														= "This only works on R6 Characters!",
+	Text														= "Loading in PHYSICS\nThis only works on R6 Characters",
 })
 
 if not IsLoaded(Game) then Game.Loaded:Wait() end
@@ -159,7 +154,9 @@ local Apply  													= function(Model)
 		if Dick then Body.Dick["PrimaryDick"].Transparency = Config.Debug and 0 or 1 end
 	end
 
-	print(Result.Success, Result.Message)
+	if Config.Debug then
+		print(Result.Success, Result.Message)
+	end
 end
 
 local Render 													= function(Delta)
