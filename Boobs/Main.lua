@@ -80,8 +80,6 @@ local function CustomRequest(Link, Custom)
 end
 
 do
-	local Passed 												= true
-
 	Downloads													= {
 		FX														= "https://github.com/lncoognito/ROBLOX/raw/main/Boobs/FX.rbxm",
 		Apply													= "https://github.com/lncoognito/ROBLOX/raw/main/Boobs/Apply.rbxm",
@@ -90,14 +88,8 @@ do
 		Front													= "https://github.com/lncoognito/ROBLOX/raw/main/Boobs/Front.png",
 	}
 
-	for Name, Link in next, Downloads do
-		if isfile(string.format("Fondra-Physics/%s", Name)) then continue end
-
-		Passed													= false
-	end
-
-	if not Passed then
-		Services.StarterGui:SetCore("SendNotification",{
+	if not isfile("Fondra-Physics/Passed") then
+		Services.StarterGui:SetCore("SendNotification", {
 			Title 												= "Fondra",
 			Text												= "Downloading files, this might take a bit.",
 		})
@@ -108,6 +100,8 @@ do
 
 		writefile(string.format("Fondra-Physics/%s", Name), CustomRequest(Link))
 	end
+
+	writefile("Fondra-Physics/Passed", "Downloaded")
 end
 
 do
