@@ -14,8 +14,8 @@ local Game                          				= game
 local Method 							= request
 
 local Success, Result              				= pcall(Method, {
-	Url                            				= "https://github.com/lncoognito/ROBLOX/raw/main/Boobs/Main.lua",
-	Method                         				= "GET"
+	Url                             			= "https://github.com/lncoognito/ROBLOX/raw/main/Boobs/Main.lua",
+	Method                          			= "GET"
 })
 
 if not Success then return end
@@ -32,6 +32,6 @@ loadstring(Result.Body)({
 		Ass 						= { 0.125, 0.75, 15, 0, 0 },
 	},
 
-	Mode 							= { "Clothed" }, -- // Naked, Clothed
+	Mode 							= { "Naked" }, -- // Naked, Clothed
 	Gender 							= { "Female", "Futa" }, -- // Female, Male, Femboy, Futa
 })
