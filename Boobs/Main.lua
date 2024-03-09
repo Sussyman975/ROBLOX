@@ -263,10 +263,10 @@ else
 
 		if Character then Apply(Character) end
 
-		getgenv()["Discord.gg/PfXgy5Nq34"][Character.Name] 		= Player.CharacterAdded:Connect(function()
+		getgenv()["Discord.gg/PfXgy5Nq34"][Player.Name] 		= Player.CharacterAdded:Connect(function(New)
 			task.wait(1)
 
-			Apply(Character)
+			Apply(New)
 		end)
 	end
 
@@ -276,10 +276,10 @@ else
 		
 		if Character then Apply(Character) end
 
-		getgenv()["Discord.gg/PfXgy5Nq34"][Character.Name]		= Player.CharacterAdded:Connect(function()
+		getgenv()["Discord.gg/PfXgy5Nq34"][Player.Name]			= Player.CharacterAdded:Connect(function(New)
 			task.wait(1)
 
-			Apply(Character, true)
+			Apply(New, true)
 		end)  
 	end)
 end
