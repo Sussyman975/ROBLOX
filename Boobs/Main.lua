@@ -27,6 +27,16 @@ local FindFirstChild											= Game.FindFirstChild
 local WaitForChild												= Game.WaitForChild
 local IsLoaded													= Game.IsLoaded
 
+Services.StarterGui:SetCore("SendNotification",{
+	Title 														= "Fondra",
+	Text														= "Loading in PHYSICS",
+})
+
+Services.StarterGui:SetCore("SendNotification",{
+	Title 														= "Fondra",
+	Text														= "This only works on R6 Characters!",
+})
+
 if not IsLoaded(Game) then Game.Loaded:Wait() end
 
 local function CustomRequire(File, Bool)
@@ -70,6 +80,8 @@ local function CustomRequest(Link, Custom)
 end
 
 do
+	local Passed 												= true
+
 	Downloads													= {
 		FX														= "https://github.com/lncoognito/ROBLOX/raw/main/Boobs/FX.rbxm",
 		Apply													= "https://github.com/lncoognito/ROBLOX/raw/main/Boobs/Apply.rbxm",
@@ -77,6 +89,19 @@ do
 		Assets													= "https://github.com/lncoognito/ROBLOX/raw/main/Boobs/Assets.rbxm",
 		Front													= "https://github.com/lncoognito/ROBLOX/raw/main/Boobs/Front.png",
 	}
+
+	for Name, Link in next, Downloads do
+		if isfile(string.format("Fondra-Physics/%s", Name)) then continue end
+
+		Passed													= false
+	end
+
+	if not Passed then
+		Services.StarterGui:SetCore("SendNotification",{
+			Title 												= "Fondra",
+			Text												= "Downloading files, this might take a bit.",
+		})
+	end
 
 	for Name, Link in next, Downloads do
 		if isfile(string.format("Fondra-Physics/%s", Name)) then continue end
@@ -246,6 +271,4 @@ else
 			Apply(Character, true)
 		end)  
 	end)
-
-	Apply(Client.Character)
 end
