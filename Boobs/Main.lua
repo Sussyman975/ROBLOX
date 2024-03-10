@@ -254,32 +254,37 @@ getgenv()["Discord.gg/PfXgy5Nq34"]["RunService"]				= Services.RunService.Render
 	
 if Game.CreatorId == 5212858 then
 	if not getgenv().SAntiCheatBypass or not getgenv().gay then
+		Services.StarterGui:SetCore("SendNotification", {
+			Title 												= "Fondra",
+			Text												= "This is deepwoken, you need a anticheat bypass.",
+		})
+
 		return
 	end
-else
-	for Index, Player in next, Services.Players:GetPlayers() do 
-		local Player 											= Player
-		local Character 										= Player.Character
+end
 
-		if Character then Apply(Character) end
+for Index, Player in next, Services.Players:GetPlayers() do 
+	local Player 												= Player
+	local Character 											= Player.Character
 
-		getgenv()["Discord.gg/PfXgy5Nq34"][Player.Name] 		= Player.CharacterAdded:Connect(function(New)
-			task.wait(1)
+	if Character then Apply(Character) end
 
-			Apply(New)
-		end)
-	end
+	getgenv()["Discord.gg/PfXgy5Nq34"][Player.Name] 			= Player.CharacterAdded:Connect(function(New)
+		task.wait(1)
 
-	getgenv()["Discord.gg/PfXgy5Nq34"]["PlayerAdded"] 			= Services.Players.PlayerAdded:Connect(function(v)
-		local Player 											= v
-		local Character 										= Player.Character
-		
-		if Character then Apply(Character) end
-
-		getgenv()["Discord.gg/PfXgy5Nq34"][Player.Name]			= Player.CharacterAdded:Connect(function(New)
-			task.wait(1)
-
-			Apply(New)
-		end)  
+		Apply(New)
 	end)
 end
+
+getgenv()["Discord.gg/PfXgy5Nq34"]["PlayerAdded"] 				= Services.Players.PlayerAdded:Connect(function(Player)
+	local Player 												= Player
+	local Character 											= Player.Character
+	
+	if Character then Apply(Character) end
+
+	getgenv()["Discord.gg/PfXgy5Nq34"][Player.Name]				= Player.CharacterAdded:Connect(function(New)
+		task.wait(1)
+
+		Apply(New)
+	end)  
+end)
