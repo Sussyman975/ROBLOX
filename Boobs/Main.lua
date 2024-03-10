@@ -164,15 +164,13 @@ local Apply  													= function(Model)
 		})
 	end
 
-	if Config.Debug and Body then
-		local Boobs 											= Body:FindFirstChild("Boobs Motor")
-		local Dick 												= Body:FindFirstChild("Dick Motor")
-		local Ass 												= Body:FindFirstChild("Ass Motor")
+	local Boobs 												= Body:FindFirstChild("Boobs Motor")
+	local Dick 													= Body:FindFirstChild("Dick Motor")
+	local Ass 													= Body:FindFirstChild("Ass Motor")
 
-		if Boobs then Body.Boobs["PrimaryBoobs"].Transparency = Config.Debug and 0 or 1 end
-		if Ass then Body.Ass["PrimaryCheeks"].Transparency	= Config.Debug and 0 or 1 end
-		if Dick then Body.Dick["PrimaryDick"].Transparency = Config.Debug and 0 or 1 end
-	end
+	if Boobs then Body.Boobs["PrimaryBoobs"].Transparency = Config.Debug and 0 or 1 end
+	if Ass then Body.Ass["PrimaryCheeks"].Transparency	= Config.Debug and 0 or 1 end
+	if Dick then Body.Dick["PrimaryDick"].Transparency = Config.Debug and 0 or 1 end
 
 	if Config.Debug then
 		print(Result.Success, Result.Message)
