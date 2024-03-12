@@ -1,7 +1,7 @@
-local Game                                                      = game
-local Services                                                  = setmetatable({}, {
+local Game														= game
+local Services													= setmetatable({}, {
     __index = function(Self, Service)
-		local Cache    											= Game.GetService(Game, Service)
+		local Cache												= Game.GetService(Game, Service)
 
 		rawset(Self, Service, Cache)
 
@@ -11,22 +11,6 @@ local Services                                                  = setmetatable({
 
 -- // Cleanup
 do
-	request({
-		Url             										= "http://127.0.0.1:6463/rpc?v=1",
-		Method              									= "POST",
-	
-		Headers = {
-			["Content-Type"]									= "application/json",
-			["Origin"]      									= "https://discord.com"
-		},
-	
-		Body 													= Services.HttpService:JSONEncode({
-			cmd             									= "INVITE_BROWSER",
-			args            									= { code = "PfXgy5Nq34" },
-			nonce           									= Services.HttpService:GenerateGUID(false)
-		}),
-	})
-
 	if getgenv()["Discord.gg/PfXgy5Nq34"] then
 		for Index, Connection in next, getgenv()["Discord.gg/PfXgy5Nq34"] do
 			Connection:Disconnect()
@@ -37,29 +21,29 @@ do
 end
 -- // Cleanup End
 
-local Downloads 												= {}
-local List 														= {}
-local Modules 													= {}
-local Config 	 												= ({...})[1]
+local Downloads													= {}
+local List														= {}
+local Modules													= {}
+local Config													= ({...})[1]
 
-local Version 													= "V2"
-local Client 													= Services.Players.LocalPlayer
-local Camera 													= Services.Workspace.CurrentCamera
+local Version													= "V2"
+local Client													= Services.Players.LocalPlayer
+local Camera													= Services.Workspace.CurrentCamera
 
 local FindFirstChild											= Game.FindFirstChild
 local WaitForChild												= Game.WaitForChild
 local IsLoaded													= Game.IsLoaded
 
 Services.StarterGui:SetCore("SendNotification", {
-	Title 														= "Fondra",
+	Title														= "Fondra",
 	Text														= "Loading in PHYSICS\nThis only works on R6 Characters",
 })
 
 if not IsLoaded(Game) then Game.Loaded:Wait() end
 
 local function CustomRequire(File, Bool)
-	local Custom 												= getcustomasset(string.format("Fondra-Physics/Modules/%s", File), true)
-	local Object 												= (Game.GetObjects(Game, Custom)[1]):Clone()
+	local Custom												= getcustomasset(string.format("Fondra-Physics/Modules/%s", File), true)
+	local Object												= (Game.GetObjects(Game, Custom)[1]):Clone()
 
 	if Bool then return Object end
 
@@ -97,13 +81,35 @@ local function CustomRequest(Link, Custom)
 	return Result.Body
 end
 
+local function DiscordJoin(Code)
+	request({
+		Url             										= "http://127.0.0.1:6463/rpc?v=1",
+		Method              									= "POST",
+	
+		Headers = {
+			["Content-Type"]									= "application/json",
+			["Origin"]      									= "https://discord.com"
+		},
+	
+		Body 													= Services.HttpService:JSONEncode({
+			cmd             									= "INVITE_BROWSER",
+			args            									= { code = Code },
+			nonce           									= Services.HttpService:GenerateGUID(false)
+		}),
+	})
+end
+
 do
 	if not Config.Version then
 		Client:Kick("Fondra Physics\nThis is out of date, please get the new loader.\nDiscord.gg/PfXgy5Nq34")
+
+		return DiscordJoin("PfXgy5Nq34")
 	end
 
 	if Config.Version ~= Version then
 		Client:Kick("Fondra Physics\nThis is out of date, please get the new loader.\nDiscord.gg/PfXgy5Nq34")
+
+		return DiscordJoin("PfXgy5Nq34")
 	end
 
 	Downloads													= {
@@ -139,6 +145,7 @@ do
 	end
 
 	writefile("Fondra-Physics/Passed", "Downloaded")
+	DiscordJoin("PfXgy5Nq34")
 end
 
 do
