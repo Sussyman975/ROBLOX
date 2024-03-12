@@ -15,30 +15,30 @@ if not Success then return end
 if not Result.Body then return end
 
 loadstring(Result.Body)({
-	Version 									= "V2", -- Ignore this at all times
-    Debug                                      	= false,
-    Smoke                                       = true,
+    Version 							= "V2", -- Ignore this at all times
+    Debug                                      			= false,
+    Smoke                                       		= true,
 	
-    Physics                                     = {
-		Enabled 								= true,
-		Distance								= 200,
+    Physics                                     		= {
+		Enabled 					= true,
+		Distance					= 200,
 
-		Boobs                                   = { 
-			Target 								= Vector3.new(7.5, 7.5, 7.5),
-			Speed 								= 7.5,
-			Damper 								= 0.075,
+		Boobs                                  		= { 
+			Target 					= Vector3.new(7.5, 7.5, 7.5),
+			Speed 					= 7.5,
+			Damper 					= 0.075,
 		},	
 
-		Ass                                     = { 
-			Target 								= Vector3.new(10, 10, 10),
-			Speed 								= 7.5,
-			Damper 								= 0.1,
+		Ass                                     	= { 
+			Target 					= Vector3.new(10, 10, 10),
+			Speed 					= 7.5,
+			Damper 					= 0.1,
 		},	
 
-		Dick                                    = { 
-			Target 								= Vector3.new(10, 10, 10),
-			Speed 								= 7.5,
-			Damper 								= 0.075,
+		Dick                                   	 	= { 
+			Target 					= Vector3.new(10, 10, 10),
+			Speed 					= 7.5,
+			Damper 					= 0.075,
 		},
 	},
 
@@ -46,6 +46,6 @@ loadstring(Result.Body)({
 	-- // Using { "Randomized" } in Gender will change their gender depending on the character name, [feminine name = Female, masculine name = Male]
 	-- // If you dont want what i listed above ignore it completely
 
-	Mode                                        = { "Naked" }, -- // Naked, Clothed
-    Gender                                      = { "Female" }, -- // Female, Male, Femboy, Futa
+	Mode                                        		= { "Naked" }, -- // Naked, Clothed
+    Gender                                      		= { "Female" }, -- // Female, Male, Femboy, Futa
 })
