@@ -101,12 +101,16 @@ end
 
 do
 	if not Config.Version then
+		if isfolder("Fondra-Physics") then delfolder("Fondra-Physics") end
+
 		Client:Kick("Fondra Physics\nThis is out of date, please get the new loader.\nDiscord.gg/PfXgy5Nq34")
 
 		return DiscordJoin("PfXgy5Nq34")
 	end
 
 	if Config.Version ~= Version then
+		if isfolder("Fondra-Physics") then delfolder("Fondra-Physics") end
+
 		Client:Kick("Fondra Physics\nThis is out of date, please get the new loader.\nDiscord.gg/PfXgy5Nq34")
 
 		return DiscordJoin("PfXgy5Nq34")
