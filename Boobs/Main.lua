@@ -201,9 +201,9 @@ local Apply  													= function(Model, Gender, Mode)
 		})
 	end
 
-	local Boobs 												= Body:FindFirstChild("Boobs Motor")
-	local Dick 													= Body:FindFirstChild("Dick Motor")
-	local Ass 													= Body:FindFirstChild("Ass Motor")
+	local Boobs 												= FindFirstChild(Body, "Boobs Motor")
+	local Dick 													= FindFirstChild(Body, "Dick Motor")
+	local Ass 													= FindFirstChild(Body, "Ass Motor")
 
 	if Boobs then Body.Boobs["PrimaryBoobs"].Transparency = Config.Debug and 0 or 1 end
 	if Ass then Body.Ass["PrimaryCheeks"].Transparency	= Config.Debug and 0 or 1 end
@@ -218,17 +218,17 @@ local Render 													= function(Delta)
 	for Index, Data in next, List do
 		local Player											= Data.Player
 		local Character											= Data.Character
-		local Body												= Character:FindFirstChild("Body")
+		local Body												= FindFirstChild(Character, "Body")
 
 		if not Body then continue end
-		if not Character then table.remove(List, Index) end
+		if not Character then table.remove(List, Index) continue end
 
-		local Torso 											= Character:FindFirstChild("Torso")
-		local Head 												= Character:FindFirstChild("Head")
+		local Torso 											= FindFirstChild(Character, "Torso")
+		local Head 												= FindFirstChild(Character, "Head")
 				
-		if not Torso then table.remove(List, Index) end
-		if not Head then table.remove(List, Index) end
-		if not Torso.Position then table.remove(List, Index) end
+		if not Torso then table.remove(List, Index) continue end
+		if not Head then table.remove(List, Index) continue end
+		if not Torso.Position then table.remove(List, Index) continue end
 
 		local Ass 												= Config.Physics.Ass
 		local Dick 												= Config.Physics.Dick
@@ -275,10 +275,10 @@ local Render 													= function(Delta)
 		if not Data.Information then Data.Information = Information end
 		if Distance > Config.Physics.Distance then continue end
 
-		if not Player then table.remove(List, Index) end
-		if not Information then table.remove(List, Index) end
+		if not Player then table.remove(List, Index) continue end
+		if not Information then table.remove(List, Index) continue end
 
-		if (tick() - Information.Boobs.Last >= 0.01) and (Body:FindFirstChild("Boobs Motor")) and (Torso) then			
+		if (tick() - Information.Boobs.Last >= 0.01) and (FindFirstChild(Body, "Boobs Motor")) and (Torso) then			
 			Information.Boobs.Last								= tick()
 
 			Information.Boobs.Spring:TimeSkip(Delta * 1.5)
@@ -289,7 +289,7 @@ local Render 													= function(Delta)
 			Information.Boobs.LastRotation						= Torso.RotVelocity
 		end
 		
-		if (tick() - Information.Ass.Last >= 0.01) and (Body:FindFirstChild("Ass Motor")) and (Torso) then			
+		if (tick() - Information.Ass.Last >= 0.01) and (FindFirstChild(Body, "Ass Motor")) and (Torso) then			
 			Information.Ass.Last								= tick()
 
 			Information.Ass.Spring:TimeSkip(Delta * 1.5)
@@ -300,7 +300,7 @@ local Render 													= function(Delta)
 			Information.Ass.LastRotation						= Torso.RotVelocity
 		end
 		
-		if (tick() - Information.Dick.Last >= 0.01) and (Body:FindFirstChild("Dick Motor")) and (Torso) then					
+		if (tick() - Information.Dick.Last >= 0.01) and (FindFirstChild(Body, "Dick Motor")) and (Torso) then					
 			Information.Dick.Last								= tick()
 
 			Information.Dick.Spring:TimeSkip(Delta * 1.5)
