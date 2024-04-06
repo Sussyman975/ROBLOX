@@ -159,7 +159,7 @@ end
 	Disconnects all connected events to the signal. Voids the signal as unusable.
 	Sets the metatable to nil.
 ]=]
-function Signal:Destroy()
+function Signal:Disconnect()
 	if self._bindableEvent then
 		-- This should disconnect all events, but in-flight events should still be
 		-- executed.
