@@ -150,7 +150,7 @@ function MessageBoxT.Show(option)
                 v.MouseButton1Click:Connect(function()
 					if Cooldown then return end
 					Cooldown = true
-                    ResultCallback(v.Text)
+                    pcall(ResultCallback, v.Text)
                     game.TweenService:Create(MessageBox["UIScale"], TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
                         Scale = 0
                     }):Play()
