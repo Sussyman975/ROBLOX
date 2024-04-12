@@ -115,11 +115,11 @@ local CoreGui = game:GetService("CoreGui")
 
 -- Interface Management
 
-if not isfile("RayfieldLibraryAssets") then
-	writefile("RayfieldLibraryAssets", game:HttpGet("https://github.com/lncoognito/ROBLOX/raw/main/RayfieldAssets.rbxm"))
+if not isfile("RayfieldLibrary") then
+	writefile("RayfieldLibrary", game:HttpGet("https://github.com/lncoognito/ROBLOX/raw/main/RayfieldAssets.rbxm"))
 end
 
-local Rayfield = game:GetObjects(getcustomasset("RayfieldLibraryAssets"))[1]
+local Rayfield = game:GetObjects(getcustomasset("RayfieldLibrary", true))[1]
 
 Rayfield.Enabled = false
 
@@ -886,17 +886,23 @@ function RayfieldLibrary:CreateWindow(Settings)
 	LoadingFrame.Title.TextTransparency = 1
 	LoadingFrame.Subtitle.TextTransparency = 1
 	Main.Shadow.Image.ImageTransparency = 1
+	LoadingFrame.Preview.ImageTransparency = 1
 	LoadingFrame.Version.TextTransparency = 1
 	LoadingFrame.Title.Text = Settings.LoadingTitle or "Rayfield Interface Suite"
 	LoadingFrame.Subtitle.Text = Settings.LoadingSubtitle or "by Sirius"
 	if Settings.LoadingTitle ~= "Rayfield Interface Suite" then
 		LoadingFrame.Version.Text = "Rayfield UI"
 	end
-	LoadingFrame.Preview.Image = isfile(Settings.LoadingImage) and getcustomasset(Settings.LoadingImage) or ""
+
+	if Settings.LoadingImage then
+		LoadingFrame.Preview.Image = getcustomasset(Settings.LoadingImage, true) or ""
+	else
+		LoadingFrame.Preview.Visible = false
+	end
+
 	Topbar.Visible = false
 	Elements.Visible = false
 	LoadingFrame.Visible = true
-
 
 	pcall(function()
 		if not Settings.ConfigurationSaving.FileName then
@@ -1156,6 +1162,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 	TweenService:Create(Main.Shadow.Image, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {ImageTransparency = 0.55}):Play()
 	wait(0.1)
 	TweenService:Create(LoadingFrame.Title, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {TextTransparency = 0}):Play()
+	TweenService:Create(LoadingFrame.Preview, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {ImageTransparency = 0}):Play()
 	wait(0.05)
 	TweenService:Create(LoadingFrame.Subtitle, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {TextTransparency = 0}):Play()
 	wait(0.05)
@@ -2388,6 +2395,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 	TweenService:Create(LoadingFrame.Title, TweenInfo.new(0.5, Enum.EasingStyle.Quint), {TextTransparency = 1}):Play()
 	TweenService:Create(LoadingFrame.Subtitle, TweenInfo.new(0.5, Enum.EasingStyle.Quint), {TextTransparency = 1}):Play()
 	TweenService:Create(LoadingFrame.Version, TweenInfo.new(0.5, Enum.EasingStyle.Quint), {TextTransparency = 1}):Play()
+	TweenService:Create(LoadingFrame.Preview, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {ImageTransparency = 1}):Play()
 	wait(0.2)
 	TweenService:Create(Main, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {Size = UDim2.new(0, 500, 0, 475)}):Play()
 	TweenService:Create(Main.Shadow.Image, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {ImageTransparency = 0.4}):Play()
@@ -2491,3 +2499,5 @@ end
 task.delay(3.5, RayfieldLibrary.LoadConfiguration, RayfieldLibrary)
 
 getgenv().RayfieldLibrary = RayfieldLibrary
+
+return RayfieldLibrary
