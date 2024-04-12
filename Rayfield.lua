@@ -1663,12 +1663,11 @@ function RayfieldLibrary:CreateWindow(Settings)
 			TweenService:Create(Input.UIStroke, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {Transparency = 0}):Play()
 			TweenService:Create(Input.Title, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {TextTransparency = 0}):Play()	
 
+			InputSettings["CurrentValue"] = ""
 			Input.InputFrame.InputBox.PlaceholderText = InputSettings.PlaceholderText
 			Input.InputFrame.Size = UDim2.new(0, Input.InputFrame.InputBox.TextBounds.X + 24, 0, 30)
 
 			Input.InputFrame.InputBox.FocusLost:Connect(function()
-
-
 				local Success, Response = pcall(function()
 					InputSettings.Callback(Input.InputFrame.InputBox.Text)
 				end)
@@ -1685,6 +1684,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 				if InputSettings.RemoveTextAfterFocusLost then
 					Input.InputFrame.InputBox.Text = ""
+					InputSettings["CurrentValue"] = Input.InputFrame.InputBox.Text
 				end
 				SaveConfiguration()
 			end)
@@ -1704,6 +1704,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			local InputSettings = {}
 			function InputSettings:Set(text) --Doesnt fire the event
 				Input.InputFrame.InputBox.Text = text
+				InputSettings["CurrentValue"] = Input.InputFrame.InputBox.Text
 			end
 			return InputSettings
 		end
