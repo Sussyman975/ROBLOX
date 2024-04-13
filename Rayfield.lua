@@ -1706,6 +1706,13 @@ function RayfieldLibrary:CreateWindow(Settings)
 				Input.InputFrame.InputBox.Text = text
 				InputSettings["CurrentValue"] = Input.InputFrame.InputBox.Text
 			end
+
+			if Settings.ConfigurationSaving then
+				if Settings.ConfigurationSaving.Enabled and InputSettings.Flag then
+					RayfieldLibrary.Flags[InputSettings.Flag] = InputSettings
+				end
+			end
+
 			return InputSettings
 		end
 
