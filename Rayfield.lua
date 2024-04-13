@@ -1663,12 +1663,12 @@ function RayfieldLibrary:CreateWindow(Settings)
 			TweenService:Create(Input.UIStroke, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {Transparency = 0}):Play()
 			TweenService:Create(Input.Title, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {TextTransparency = 0}):Play()	
 
-			InputSettings["CurrentValue"] = ""
 			Input.InputFrame.InputBox.PlaceholderText = InputSettings.PlaceholderText
 			Input.InputFrame.Size = UDim2.new(0, Input.InputFrame.InputBox.TextBounds.X + 24, 0, 30)
 
 			Input.InputFrame.InputBox.FocusLost:Connect(function()
 				local Success, Response = pcall(function()
+					InputSettings["CurrentValue"] = Input.InputFrame.InputBox.Text
 					InputSettings.Callback(Input.InputFrame.InputBox.Text)
 				end)
 				if not Success then
@@ -1701,7 +1701,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 				TweenService:Create(Input.InputFrame, TweenInfo.new(0.55, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Size = UDim2.new(0, Input.InputFrame.InputBox.TextBounds.X + 24, 0, 30)}):Play()
 			end)
 
-			local InputSettings = {}
 			function InputSettings:Set(text) --Doesnt fire the event
 				Input.InputFrame.InputBox.Text = text
 				InputSettings["CurrentValue"] = Input.InputFrame.InputBox.Text
