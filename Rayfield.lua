@@ -2503,8 +2503,6 @@ function RayfieldLibrary:LoadConfiguration()
 	end
 end
 
-task.delay(3.5, RayfieldLibrary.LoadConfiguration, RayfieldLibrary)
-
 getgenv().RayfieldLibrary = RayfieldLibrary
 
 return RayfieldLibrary
