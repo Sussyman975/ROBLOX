@@ -1549,6 +1549,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 				h,s,v = ColorPickerSettings.Color:ToHSV()
 				color = Color3.fromHSV(h,s,v)
 				setDisplay()
+				pcall(function()ColorPickerSettings.Callback(Color3.fromHSV(h,s,v))end)
 			end
 
 			return ColorPickerSettings
